@@ -1,0 +1,26 @@
+# .env and private keys
+.env
+*.pem
+
+# gradle build outputs
+# **/build/
+**/out/
+
+# logs
+**/*.log
+
+# IntelliJ / VSCode etc.
+.idea/
+.vscode/
+*.iml
+
+# node_modules for frontend
+frontend/node_modules/
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+!backend/**
+!frontend/**
+

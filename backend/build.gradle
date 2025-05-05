@@ -1,0 +1,85 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.2.3'
+    id 'io.spring.dependency-management' version '1.1.4'
+}
+
+group = 'org.zerock'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    sourceCompatibility = '21'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
+    implementation 'org.springframework.boot:spring-boot-starter-batch'
+
+    implementation 'org.mariadb.jdbc:mariadb-java-client'
+
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.4'
+
+    // QueryDSL
+    implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
+    implementation 'com.querydsl:querydsl-apt:5.0.0:jakarta'
+    annotationProcessor 'com.querydsl:querydsl-apt:5.0.0:jakarta'
+    annotationProcessor 'jakarta.persistence:jakarta.persistence-api:3.1.0'
+    annotationProcessor 'jakarta.annotation:jakarta.annotation-api:2.1.1'
+
+    implementation 'net.coobird:thumbnailator:0.4.20'
+
+    // JWT
+    implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+
+    // gson
+    implementation 'com.google.code.gson:gson:2.10.1'
+
+    // lombok
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    // test
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    // 테스트용 Lombok 추가해야함
+    testCompileOnly 'org.projectlombok:lombok'
+    testAnnotationProcessor 'org.projectlombok:lombok'
+
+    // 사진 확장자 관련 라이브러리 twelvemonkey
+    implementation 'com.twelvemonkeys.imageio:imageio-webp:3.8.1'
+    implementation 'com.twelvemonkeys.imageio:imageio-jpeg:3.8.1'
+    implementation 'com.twelvemonkeys.imageio:imageio-pnm:3.8.1'
+    implementation 'com.twelvemonkeys.imageio:imageio-tiff:3.8.1'
+    implementation 'com.twelvemonkeys.imageio:imageio-bmp:3.8.1'
+
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+def generated = layout.buildDirectory.dir("generated/querydsl")
+
+sourceSets {
+    main {
+        java {
+            srcDirs += generated
+        }
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.annotationProcessorGeneratedSourcesDirectory = generated.get().asFile
+}

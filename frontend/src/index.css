@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 전역 설정 추가 */
+/* html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+} */
+
+/* 트라이 */
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* 스크롤 제거 */
+}
+
+html,
+body {
+  background-color: #437cd0;
+  color: #e6edf3;
+  font-family: "Noto Sans KR", sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
